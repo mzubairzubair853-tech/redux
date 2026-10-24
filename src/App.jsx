@@ -3,8 +3,13 @@ import heroImg from './assets/hero.png'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import './App.css'
+import {useDispatch, useSelector} from "react-redux";
+import {addTodo, removeTodo} from "./feature/todoSlice";
+
 
 function App() {
+  const todos = useSelector((state) => state.todos.todos);
+  console.log(todos)
   const [count, setCount] = useState(0)
 
   return (
@@ -113,10 +118,21 @@ function App() {
         </div>
       </section>
 
+      <div>
+        {todos.map((todoItems) =>
+          <div key={todoItems.id}>
+            <span>{todoItems.text}</span>
+            <button>Delete  </button>
+          </div>
+        )}
+      </div>
+
       <div className="ticks"></div>
       <section id="spacer"></section>
     </>
   )
 }
+
+
 
 export default App
